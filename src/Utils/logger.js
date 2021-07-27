@@ -1,0 +1,32 @@
+//configuring winston for logging
+const winston = require("winston");
+
+const logger = winston.createLogger({
+    level: "info",
+    format: winston.format.json(),
+    defaultMeta: {
+        service: "user-service",
+    },
+    transports: [
+        //
+        // - Write all logs with level `error` and below to `error.log`
+        // - Write all logs with level `info` and below to `combined.log`
+        //
+        new winston.transports.File({
+            filename: "error.log",
+            level: "error",
+        }),
+        new winston.transports.File({
+            filename: "combined.log",
+        }),
+    ],
+});
+
+logger.logError = (err) => {
+    console.error(err.message);
+    console.error(err.stack);
+    logger.error({ message: err.message, stack: err.stack });
+    logger.info(err);
+};
+
+module.exports = logger;

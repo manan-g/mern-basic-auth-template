@@ -1,0 +1,16 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+.env
+combined.log
+error.log
+
+# Dependency directories
+node_modules
+
+#Excluding build directory
+public/
+
+statusCodes.txt
